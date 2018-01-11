@@ -3,57 +3,6 @@ $ano = date("Y");
 $month = date("Y-m");
 $hoje = date("Y-m-d");
 
-//selecionar anos
-if($num_years == 0) {
-
-    $query_y = "SELECT DISTINCT DATE_FORMAT( date, '%Y' ) AS year
-	FROM glpi_tickets
-	WHERE glpi_tickets.is_deleted = '0'
-	AND date IS NOT NULL	
-	ORDER BY year ASC ";
-}
-
-if($num_years == 1) {
-
-    $query_y = "SELECT DISTINCT DATE_FORMAT( date, '%Y' ) AS year
-	FROM glpi_tickets
-	WHERE glpi_tickets.is_deleted = '0'
-	AND date IS NOT NULL
-	ORDER BY year DESC
-	LIMIT ".$num_years."";
-}
-
-if($num_years > 1) {
-
-    $query_y = "SELECT DISTINCT DATE_FORMAT( date, '%Y' ) AS year
-	FROM glpi_tickets
-	WHERE glpi_tickets.is_deleted = '0'
-	AND date IS NOT NULL
-	ORDER BY year DESC
-	LIMIT ".$num_years."";
-
-}
-
-$result_y = $DB->query($query_y);
-
-//numero de anos para eixos Y
-$conta_y = $DB->numrows($result_y);
-
-$arr_years = array();
-
-while ($row_y = $DB->fetch_assoc($result_y))	{
-    $arr_years[] = $row_y['year'];
-}
-
-
-if($num_years > 1) {
-    $arr_years = array_reverse($arr_years);
-    $years = implode(",", $arr_years);
-}
-else {
-    $years = implode(",", $arr_years);
-}
-
 
 //chamados ano
 $sql_ano =	"SELECT COUNT(glpi_tickets.id) as total        
