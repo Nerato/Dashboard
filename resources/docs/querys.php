@@ -48,7 +48,6 @@ $sql_users = " SELECT COUNT(DISTINCT `glpi_users`.id) AS total
 $result_users = $DB->query($sql_users);
 $total_users = $DB->fetch_assoc($result_users);
 
-?>
 
 
 
